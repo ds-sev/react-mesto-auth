@@ -10,6 +10,9 @@ import api from '../utils/api'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import CardDeleteConfirmationPopup from './CardDeleteConfirmationPopup'
+import ProtectedRouteElement from './ProtectedRoute'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import Register from './Register'
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -21,6 +24,7 @@ function App() {
   const [cards, setCards] = useState([])
   const [isCardDeleteConfirmationPopupOpen, setIsCardDeleteConfirmationPopupOpen] = useState(false)
   const [cardToDelete, setCardToDelete] = useState({})
+  const [loggedIn, setLoggedIn] = useState(false)
 
   const [deleteCardConfirmationBtnText, setDeleteCardConfirmationBtnText] = useState('Да')
   const [editProfileBtnText, setEditProfileBtnText] = useState('Сохранить')
@@ -122,44 +126,66 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
+          {/*<ProtectedRouteElement*/}
+          {/*path={}*/}
+          {/*loggedIn={}*/}
+          {/*component={}*/}
+          {/*/>*/}
           <Header />
-          <Main
-            onEditAvatar={handleEditAvatarClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditProfile={handleEditProfileClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDeleteConfirm={handleCardDeleteConfirmationClick}
-            cards={cards}
-          />
+          {/*<div className="container">1213</div>*/}
+          <Routes>
+
+            <Route path="/mesto-react" element={loggedIn ? <Navigate to="/sign-up" replace /> : <Navigate to="/sign-up" replace />} />
+            <Route path="/sign-up" element={<Register />} />
+
+          </Routes>
+
+          {/*<Register />*/}
+
+          <div className="push"></div>
+
+          {/*<Main*/}
+          {/*  onEditAvatar={handleEditAvatarClick}*/}
+          {/*  onAddPlace={handleAddPlaceClick}*/}
+          {/*  onEditProfile={handleEditProfileClick}*/}
+          {/*  onCardClick={handleCardClick}*/}
+          {/*  onCardLike={handleCardLike}*/}
+          {/*  onCardDeleteConfirm={handleCardDeleteConfirmationClick}*/}
+          {/*  cards={cards}*/}
+          {/*/>*/}
+
+
+
+
           <Footer />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-            buttonText={editProfileBtnText}
-          />
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlaceSubmit}
-            buttonText={addPlaceBtnText}
-          />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-            buttonText={editProfileBtnText}
-          />
-          <CardDeleteConfirmationPopup
-            isOpen={isCardDeleteConfirmationPopupOpen}
-            onClose={closeAllPopups}
-            onCardDelete={handleCardDelete}
-            onCardDeleteComfirmSubmit={handleCardDeleteConfirmationClick}
-            cardToDelete={cardToDelete}
-            buttonText={deleteCardConfirmationBtnText}
-          />
-          <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
+
+          {/*<EditProfilePopup*/}
+          {/*  isOpen={isEditProfilePopupOpen}*/}
+          {/*  onClose={closeAllPopups}*/}
+          {/*  onUpdateUser={handleUpdateUser}*/}
+          {/*  buttonText={editProfileBtnText}*/}
+          {/*/>*/}
+          {/*<AddPlacePopup*/}
+          {/*  isOpen={isAddPlacePopupOpen}*/}
+          {/*  onClose={closeAllPopups}*/}
+          {/*  onAddPlace={handleAddPlaceSubmit}*/}
+          {/*  buttonText={addPlaceBtnText}*/}
+          {/*/>*/}
+          {/*<EditAvatarPopup*/}
+          {/*  isOpen={isEditAvatarPopupOpen}*/}
+          {/*  onClose={closeAllPopups}*/}
+          {/*  onUpdateAvatar={handleUpdateAvatar}*/}
+          {/*  buttonText={editProfileBtnText}*/}
+          {/*/>*/}
+          {/*<CardDeleteConfirmationPopup*/}
+          {/*  isOpen={isCardDeleteConfirmationPopupOpen}*/}
+          {/*  onClose={closeAllPopups}*/}
+          {/*  onCardDelete={handleCardDelete}*/}
+          {/*  onCardDeleteComfirmSubmit={handleCardDeleteConfirmationClick}*/}
+          {/*  cardToDelete={cardToDelete}*/}
+          {/*  buttonText={deleteCardConfirmationBtnText}*/}
+          {/*/>*/}
+          {/*<ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />*/}
         </div>
       </div>
     </CurrentUserContext.Provider>

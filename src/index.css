@@ -75,6 +75,108 @@
 @import url('./blocks/image-view/__item/image-view__item.css');
 @import url('./blocks/image-view/__title/image-view__title.css');
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   background-color: black;
+  height: 100%;
+  /*border: 1px solid red;*/
+  
+}
+
+body {
+  height: 100%;
+
+}
+
+.container {
+  height: 100%;
+}
+
+.push {
+  flex-grow: 1;
+
+}
+
+
+
+.link {
+  margin-left: 3px;
+  color: #ffffff;
+  text-decoration: none;
+  
+}
+
+
+.sign-page {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 880px;
+  padding-left: 19px;
+  padding-right: 19px;
+  height: 100%;
+  max-height: 521px;
+  text-align: center;
+  width: 358px;
+
+
+
+}
+
+.sign-page__title {
+  margin-top: 60px;
+  margin-bottom: 50px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.sign-page__inputs-container {
+  margin-bottom: 216px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sign-page__input-field {
+  margin: 0;
+  padding: 2px 0 9px;
+  width: 100%;
+  background-color: black;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #CCCCCC;
+  outline:none;
+}
+
+
+
+.sign-button {
+  min-height: 50px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  background-color: white;
+  color: black;
+}
+
+.sign__hint {
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
