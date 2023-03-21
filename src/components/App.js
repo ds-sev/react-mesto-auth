@@ -11,7 +11,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import CardDeleteConfirmationPopup from './CardDeleteConfirmationPopup'
 import ProtectedRouteElement from './ProtectedRoute'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Register from './Register'
 import InfoTooltipPopup from './InfoTooltip'
 import Login from './Login'
@@ -127,6 +127,7 @@ function App() {
   }
 
   return (
+
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
@@ -137,23 +138,32 @@ function App() {
           {/*/>*/}
           <Header />
           <Routes>
-
-
-            <Route path="/" element={loggedIn ? <Navigate to="/mesto" replace /> : <Navigate to="/signup" replace />} />
-
-
+            {/*<ProtectedRouteElement*/}
+            {/*  path="/mesto"*/}
+            {/*  loggedIn={loggedIn}*/}
+            {/*  component={Main}*/}
+            {/*  />*/}
+            <Route path="/"
+                   element={loggedIn
+                     ? <Navigate to="/mesto" replace />
+                     : <Navigate to="/signup" replace />} />
             <Route path="/signup" element={<Register />} />
+
             <Route path="/signin" element={<Login />} />
-            <Route path="/mesto" element={
-              <Main
-                onEditAvatar={handleEditAvatarClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditProfile={handleEditProfileClick}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDeleteConfirm={handleCardDeleteConfirmationClick}
-                cards={cards}
-              />} />
+
+
+            <Route path="/mesto" element={<ProtectedRouteElement
+              element={Main}
+              onEditAvatar={handleEditAvatarClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditProfile={handleEditProfileClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDeleteConfirm={handleCardDeleteConfirmationClick}
+              cards={cards}
+              loggedIn={loggedIn}
+            />}
+            />
           </Routes>
           {/*<Register />*/}
           <div className="push"></div>
@@ -203,6 +213,7 @@ function App() {
         </div>
       </div>
     </CurrentUserContext.Provider>
+
   )
 }
 
