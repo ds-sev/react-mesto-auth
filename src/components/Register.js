@@ -35,7 +35,7 @@ function Register() {
     auth
       .register(formValue)
       .then((res) => {
-        // setCards([res, ...cards])
+        navigate('/signin', {replace: true})
 
       })
       .catch((err) => console.log(err))

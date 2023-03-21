@@ -11,10 +11,11 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import CardDeleteConfirmationPopup from './CardDeleteConfirmationPopup'
 import ProtectedRouteElement from './ProtectedRoute'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import Register from './Register'
 import InfoTooltipPopup from './InfoTooltip'
 import Login from './Login'
+import auth from '../utils/auth'
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -33,7 +34,32 @@ function App() {
   const [editProfileBtnText, setEditProfileBtnText] = useState('Сохранить')
   const [addPlaceBtnText, setAddPlaceBtnText] = useState('Добавить')
 
+  const navigate = useNavigate()
+
+
+
+  const tokenCheck = () => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token')
+      console.log(token)
+      if (token) {
+        auth.checkToken(token).then((res) => {
+          if (res) {
+            setLoggedIn(true)
+            navigate('/mesto', {replace: true})
+          }
+        })
+      }
+
+    }
+  }
+
+  console.log(loggedIn)
+
+
+
   useEffect(() => {
+   tokenCheck()
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cardsData]) => {
         setCurrentUser(userData)
@@ -126,8 +152,10 @@ function App() {
       .catch((err) => console.log(err))
   }
 
+  const handleLogin = () => {
 
-
+    setLoggedIn(true)
+  }
 
   return (
 
@@ -152,12 +180,8 @@ function App() {
                      ? <Navigate to="/mesto" replace />
                      : <Navigate to="/signup" replace />} />
             <Route path="/signup" element={<Register
-
             />} />
-
-            <Route path="/signin" element={<Login />} />
-
-
+            <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
             <Route path="/mesto" element={<ProtectedRouteElement
               element={Main}
               onEditAvatar={handleEditAvatarClick}
