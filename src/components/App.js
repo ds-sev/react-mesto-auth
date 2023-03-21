@@ -13,12 +13,15 @@ import CardDeleteConfirmationPopup from './CardDeleteConfirmationPopup'
 import ProtectedRouteElement from './ProtectedRoute'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Register from './Register'
+import InfoTooltipPopup from './InfoTooltip'
+import Login from './Login'
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' })
   const [cards, setCards] = useState([])
@@ -58,6 +61,7 @@ function App() {
     setIsImagePopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsCardDeleteConfirmationPopupOpen(false)
+    setIsInfoTooltipPopupOpen(false)
     setSelectedCard({ name: '', link: '' })
     setEditProfileBtnText('Сохранить')
     setAddPlaceBtnText('Добавить')
@@ -132,33 +136,43 @@ function App() {
           {/*component={}*/}
           {/*/>*/}
           <Header />
-          {/*<div className="container">1213</div>*/}
-          {/*<Routes>*/}
+          <Routes>
 
-          {/*  <Route path="/mesto-react" element={loggedIn ? <Navigate to="/sign-up" replace /> : <Navigate to="/sign-up" replace />} />*/}
-          {/*  <Route path="/sign-up" element={<Register />} />*/}
 
-          {/*</Routes>*/}
+            <Route path="/" element={loggedIn ? <Navigate to="/mesto" replace /> : <Navigate to="/signup" replace />} />
 
+
+            <Route path="/signup" element={<Register />} />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/mesto" element={
+              <Main
+                onEditAvatar={handleEditAvatarClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditProfile={handleEditProfileClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDeleteConfirm={handleCardDeleteConfirmationClick}
+                cards={cards}
+              />} />
+          </Routes>
           {/*<Register />*/}
-
           <div className="push"></div>
-
-          <Main
-            onEditAvatar={handleEditAvatarClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditProfile={handleEditProfileClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDeleteConfirm={handleCardDeleteConfirmationClick}
-            cards={cards}
-          />
-
-
-
-
+          {/*<Main*/}
+          {/*  onEditAvatar={handleEditAvatarClick}*/}
+          {/*  onAddPlace={handleAddPlaceClick}*/}
+          {/*  onEditProfile={handleEditProfileClick}*/}
+          {/*  onCardClick={handleCardClick}*/}
+          {/*  onCardLike={handleCardLike}*/}
+          {/*  onCardDeleteConfirm={handleCardDeleteConfirmationClick}*/}
+          {/*  cards={cards}*/}
+          {/*/>*/}
           <Footer />
-
+          <InfoTooltipPopup
+            isOpen={isInfoTooltipPopupOpen}
+            onClose={closeAllPopups}
+            // onUpdateUser={handleUpdateUser}
+            // buttonText={editProfileBtnText}
+          />
           {/*<EditProfilePopup*/}
           {/*  isOpen={isEditProfilePopupOpen}*/}
           {/*  onClose={closeAllPopups}*/}
