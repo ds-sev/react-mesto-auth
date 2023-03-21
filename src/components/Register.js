@@ -1,11 +1,12 @@
 import Footer from './Footer'
 
 function Register() {
-
+  const buttonText = 'Зарегистрироваться'
+  const title = 'Регистрация'
   return (
 
       <div className="sign-page">
-        <h3 className="sign-page__title">"title"</h3>
+        <h3 className="sign-page__title">{title}</h3>
         <div className="sign-page__inputs-container">
           <label>
             <input
@@ -40,7 +41,7 @@ function Register() {
           className={`edit-form__button-save sign-button button `}
           type="submit"
         >
-          "buttonText"
+          {buttonText}
         </button>
         <span className="sign__hint">Уже зарегистрированы?<a className="link"
                                                              href="#">Войти</a></span>

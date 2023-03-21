@@ -133,26 +133,26 @@ function App() {
           {/*/>*/}
           <Header />
           {/*<div className="container">1213</div>*/}
-          <Routes>
+          {/*<Routes>*/}
 
-            <Route path="/mesto-react" element={loggedIn ? <Navigate to="/sign-up" replace /> : <Navigate to="/sign-up" replace />} />
-            <Route path="/sign-up" element={<Register />} />
+          {/*  <Route path="/mesto-react" element={loggedIn ? <Navigate to="/sign-up" replace /> : <Navigate to="/sign-up" replace />} />*/}
+          {/*  <Route path="/sign-up" element={<Register />} />*/}
 
-          </Routes>
+          {/*</Routes>*/}
 
           {/*<Register />*/}
 
           <div className="push"></div>
 
-          {/*<Main*/}
-          {/*  onEditAvatar={handleEditAvatarClick}*/}
-          {/*  onAddPlace={handleAddPlaceClick}*/}
-          {/*  onEditProfile={handleEditProfileClick}*/}
-          {/*  onCardClick={handleCardClick}*/}
-          {/*  onCardLike={handleCardLike}*/}
-          {/*  onCardDeleteConfirm={handleCardDeleteConfirmationClick}*/}
-          {/*  cards={cards}*/}
-          {/*/>*/}
+          <Main
+            onEditAvatar={handleEditAvatarClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditProfile={handleEditProfileClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDeleteConfirm={handleCardDeleteConfirmationClick}
+            cards={cards}
+          />
 
 
 
