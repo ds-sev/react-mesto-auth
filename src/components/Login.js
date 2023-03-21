@@ -1,7 +1,11 @@
+import Header from './Header'
+
 function Login() {
   const buttonText = 'Войти'
   const title = 'Вход'
   return (
+<>
+    <Header linkText="Регистрация" link="/signup"/>
 
     <div className="sign-page">
       <h3 className="sign-page__title">{title}</h3>
@@ -46,7 +50,7 @@ function Login() {
     </div>
 
 
-
+</>
   )
 }
 

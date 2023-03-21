@@ -83,6 +83,7 @@ class Api {
       }),
     }).then(this._checkResponse)
   }
+
 }
 
 const api = new Api({

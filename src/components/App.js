@@ -126,6 +126,9 @@ function App() {
       .catch((err) => console.log(err))
   }
 
+
+
+
   return (
 
     <CurrentUserContext.Provider value={currentUser}>
@@ -136,7 +139,8 @@ function App() {
           {/*loggedIn={}*/}
           {/*component={}*/}
           {/*/>*/}
-          <Header />
+          {/*<Header*/}
+          {/*  linkText={headerLinkText}/>*/}
           <Routes>
             {/*<ProtectedRouteElement*/}
             {/*  path="/mesto"*/}
@@ -147,7 +151,9 @@ function App() {
                    element={loggedIn
                      ? <Navigate to="/mesto" replace />
                      : <Navigate to="/signup" replace />} />
-            <Route path="/signup" element={<Register />} />
+            <Route path="/signup" element={<Register
+
+            />} />
 
             <Route path="/signin" element={<Login />} />
 
