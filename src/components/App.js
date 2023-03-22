@@ -36,7 +36,7 @@ function App() {
 
   const navigate = useNavigate()
 
-
+  const [email, setEmail] = useState('')
 
   const tokenCheck = () => {
     if (localStorage.getItem('token')) {
@@ -46,20 +46,27 @@ function App() {
         auth.checkToken(token).then((res) => {
           if (res) {
             setLoggedIn(true)
-            navigate('/mesto', {replace: true})
+            navigate('/mesto', { replace: true })
+            setEmail(res.data.email)
           }
         })
       }
-
     }
   }
 
-  console.log(loggedIn)
+
+
+  console.log(email)
+
+
+
+
+
 
 
 
   useEffect(() => {
-   tokenCheck()
+    tokenCheck()
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cardsData]) => {
         setCurrentUser(userData)
@@ -167,7 +174,6 @@ function App() {
           {/*loggedIn={}*/}
           {/*component={}*/}
           {/*/>*/}
-          {/*<Header*/}
           {/*  linkText={headerLinkText}/>*/}
           <Routes>
             {/*<ProtectedRouteElement*/}
@@ -192,6 +198,7 @@ function App() {
               onCardDeleteConfirm={handleCardDeleteConfirmationClick}
               cards={cards}
               loggedIn={loggedIn}
+              email={email}
             />}
             />
           </Routes>
@@ -213,33 +220,33 @@ function App() {
             // onUpdateUser={handleUpdateUser}
             // buttonText={editProfileBtnText}
           />
-          {/*<EditProfilePopup*/}
-          {/*  isOpen={isEditProfilePopupOpen}*/}
-          {/*  onClose={closeAllPopups}*/}
-          {/*  onUpdateUser={handleUpdateUser}*/}
-          {/*  buttonText={editProfileBtnText}*/}
-          {/*/>*/}
-          {/*<AddPlacePopup*/}
-          {/*  isOpen={isAddPlacePopupOpen}*/}
-          {/*  onClose={closeAllPopups}*/}
-          {/*  onAddPlace={handleAddPlaceSubmit}*/}
-          {/*  buttonText={addPlaceBtnText}*/}
-          {/*/>*/}
-          {/*<EditAvatarPopup*/}
-          {/*  isOpen={isEditAvatarPopupOpen}*/}
-          {/*  onClose={closeAllPopups}*/}
-          {/*  onUpdateAvatar={handleUpdateAvatar}*/}
-          {/*  buttonText={editProfileBtnText}*/}
-          {/*/>*/}
-          {/*<CardDeleteConfirmationPopup*/}
-          {/*  isOpen={isCardDeleteConfirmationPopupOpen}*/}
-          {/*  onClose={closeAllPopups}*/}
-          {/*  onCardDelete={handleCardDelete}*/}
-          {/*  onCardDeleteComfirmSubmit={handleCardDeleteConfirmationClick}*/}
-          {/*  cardToDelete={cardToDelete}*/}
-          {/*  buttonText={deleteCardConfirmationBtnText}*/}
-          {/*/>*/}
-          {/*<ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />*/}
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+            buttonText={editProfileBtnText}
+          />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+            buttonText={addPlaceBtnText}
+          />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+            buttonText={editProfileBtnText}
+          />
+          <CardDeleteConfirmationPopup
+            isOpen={isCardDeleteConfirmationPopupOpen}
+            onClose={closeAllPopups}
+            onCardDelete={handleCardDelete}
+            onCardDeleteComfirmSubmit={handleCardDeleteConfirmationClick}
+            cardToDelete={cardToDelete}
+            buttonText={deleteCardConfirmationBtnText}
+          />
+          <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
         </div>
       </div>
     </CurrentUserContext.Provider>

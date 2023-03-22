@@ -122,10 +122,20 @@ body {
 
 }
 
+
+
 @media screen and (max-width: 544px) {
   .header__profile {
     font-size: 14px;
   }
+}
+
+.header__sign-btn_out {
+  color: #A9A9A9;
+}
+
+.header__email {
+  margin-right: 24px;
 }
 
 

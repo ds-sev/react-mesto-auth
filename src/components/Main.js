@@ -1,13 +1,18 @@
 import { useContext } from 'react'
 import Card from './Card'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import Header from './Header'
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDeleteConfirm, cards }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDeleteConfirm, cards, linkText, email }) {
 
   const currentUser = useContext(CurrentUserContext)
 
+  linkText = 'SignIn'
+
 
   return (
+    <>
+    <Header linkText="Выйти" link="/signup" btnTheme="header__sign-btn_out" email={email}/>
     <main className="content">
       <section className="profile wrapper">
         <div className="profile__photo-container" onClick={onEditAvatar}>
@@ -52,6 +57,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
         ))}
       </section>
     </main>
+    </>
   )
 }
 

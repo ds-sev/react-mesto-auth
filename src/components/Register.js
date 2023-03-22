@@ -9,6 +9,8 @@ function Register() {
   const buttonText = 'Зарегистрироваться'
   const title = 'Регистрация'
 
+
+
   const [formValue, setFormValue] = useState({
     email: '',
     password: ''
