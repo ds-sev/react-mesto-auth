@@ -56,7 +56,8 @@ function App() {
 
 
 
-  console.log(email)
+  console.log(localStorage.getItem('token'))
+
 
 
 
@@ -160,9 +161,14 @@ function App() {
   }
 
   const handleLogin = () => {
-
     setLoggedIn(true)
+    tokenCheck()
   }
+
+  function handleSignOut() {
+    localStorage.clear()
+  }
+
 
   return (
 
@@ -199,6 +205,7 @@ function App() {
               cards={cards}
               loggedIn={loggedIn}
               email={email}
+              onSignOut={handleSignOut}
             />}
             />
           </Routes>
