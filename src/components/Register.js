@@ -1,57 +1,33 @@
-import Footer from './Footer'
 import Header from './Header'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import api from '../utils/api'
-import auth from '../utils/auth'
 
-function Register() {
+import InfoTooltip from './InfoTooltip'
+
+function Register({onRegister}) {
   const buttonText = 'Зарегистрироваться'
   const title = 'Регистрация'
 
-
-
-  const [formValue, setFormValue] = useState({
+  const [regFormValue, setRegFormValue] = useState({
     email: '',
     password: ''
   })
 
-  const navigate = useNavigate()
-
   const handleChange = (evt) => {
     const {name, value} = evt.target
-    setFormValue({
-      ...formValue, [name]: value
+    setRegFormValue({
+      ...regFormValue, [name]: value
     })
   }
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    onRegister(formValue)
-    console.log('hello')
+    onRegister(regFormValue)
 
   }
-
-  function onRegister(formValue) {
-    // setAddPlaceBtnText('Добавляем...')
-    auth
-      .register(formValue)
-      .then((res) => {
-        navigate('/signin', {replace: true})
-
-      })
-      .catch((err) => console.log(err))
-
-  }
-
-
-
-
-  // console.log(formValue)
 
   return (
     <>
-    <Header linkText="Войти" link="/signin"/>
+    <Header btnText="Войти" btnLink="/signin"/>
 
       <div className="sign-page">
         <h3 className="sign-page__title">{title}</h3>
@@ -62,7 +38,7 @@ function Register() {
             <input
               name="email"
               type="email"
-              value={formValue.email || ''}
+              value={regFormValue.email || ''}
               onChange={handleChange}
               className="sign-page__input-field"
               placeholder="Email"
@@ -77,7 +53,7 @@ function Register() {
             <input
               name="password"
               type="password"
-              value={formValue.password || ''}
+              value={regFormValue.password || ''}
               onChange={handleChange}
               className="sign-page__input-field"
               placeholder="Пароль"
@@ -102,6 +78,8 @@ function Register() {
         <span className="sign__hint">Уже зарегистрированы?<a className="link"
                                                              href="/signin">Войти</a></span>
       </div>
+
+      <InfoTooltip />
 
     </>
 

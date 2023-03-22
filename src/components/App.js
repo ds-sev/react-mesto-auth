@@ -17,12 +17,18 @@ import InfoTooltipPopup from './InfoTooltip'
 import Login from './Login'
 import auth from '../utils/auth'
 
+import SuccessIcon from '../images/icons/Union.svg'
+import FailIcon from '../images/icons/Union_dis.svg'
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
+  const [infoTooltipImage, setInfoTooltipImage] = useState(null)
+  const [infoTooltipText, setInfoTooltipText] = useState('')
+
   const [currentUser, setCurrentUser] = useState({})
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' })
   const [cards, setCards] = useState([])
@@ -56,7 +62,7 @@ function App() {
 
 
 
-  console.log(localStorage.getItem('token'))
+
 
 
 
@@ -160,13 +166,49 @@ function App() {
       .catch((err) => console.log(err))
   }
 
-  const handleLogin = () => {
-    setLoggedIn(true)
-    tokenCheck()
+
+
+  function handleLogin(formValue) {
+    // setAddPlaceBtnText('Добавляем...')
+    auth
+      .login(formValue)
+      .then((res) => {
+        localStorage.setItem('token', res.token)
+        setLoggedIn(true)
+        tokenCheck()
+        navigate('/', { replace: true })
+      })
+      .catch((err) => console.log(err))
+  }
+
+  function handleRegister(regFormValue) {
+    console.log(regFormValue)
+    // setAddPlaceBtnText('Добавляем...')
+    auth
+      .register(regFormValue)
+      .then((res) => {
+
+          navigate('/signin', { replace: true })
+          setInfoTooltipImage(SuccessIcon)
+        setInfoTooltipText('Вы успешно зарегистрировались!')
+          setIsInfoTooltipPopupOpen(true)
+
+
+
+
+
+      })
+      .catch((err) => {
+        setInfoTooltipImage(FailIcon)
+        setInfoTooltipText('Что-то пошло не так! Попробуйте ещё раз.')
+        setIsInfoTooltipPopupOpen(true)
+        console.log(err)
+      })
+
   }
 
   function handleSignOut() {
-    localStorage.clear()
+    localStorage.removeItem('token')
   }
 
 
@@ -191,9 +233,8 @@ function App() {
                    element={loggedIn
                      ? <Navigate to="/mesto" replace />
                      : <Navigate to="/signup" replace />} />
-            <Route path="/signup" element={<Register
-            />} />
-            <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+            <Route path="/signup" element={<Register onRegister={handleRegister} />}  />
+            <Route path="/signin" element={<Login onLogin={handleLogin} />} />
             <Route path="/mesto" element={<ProtectedRouteElement
               element={Main}
               onEditAvatar={handleEditAvatarClick}
@@ -224,6 +265,8 @@ function App() {
           <InfoTooltipPopup
             isOpen={isInfoTooltipPopupOpen}
             onClose={closeAllPopups}
+            image={infoTooltipImage}
+            text={infoTooltipText}
             // onUpdateUser={handleUpdateUser}
             // buttonText={editProfileBtnText}
           />

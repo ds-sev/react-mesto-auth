@@ -13,7 +13,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
 
   return (
     <>
-    <Header linkText="Выйти" btnLink='/signin' onSignOut={onSignOut} btnTheme="header__sign-btn_out" email={email}/>
+    <Header btnText="Выйти" btnLink='/signin' onSignOut={onSignOut} btnTheme="header__sign-btn_out" email={email}/>
     <main className="content">
       <section className="profile wrapper">
         <div className="profile__photo-container" onClick={onEditAvatar}>
