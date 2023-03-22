@@ -3,7 +3,7 @@ import Card from './Card'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import Header from './Header'
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDeleteConfirm, cards, linkText, email, onSignOut }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDeleteConfirm, cards, linkText, email, onSignOutConfirm, onClick }) {
 
   const currentUser = useContext(CurrentUserContext)
 
@@ -11,9 +11,10 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
 
 
 
+
   return (
     <>
-    <Header btnText="Выйти" btnLink='/signin' onSignOut={onSignOut} btnTheme="header__sign-btn_out" email={email}/>
+    <Header btnText="Выйти" onClick={onSignOutConfirm} onSignOutConfirm={onSignOutConfirm} btnTheme="header__sign-btn_out" email={email}/>
     <main className="content">
       <section className="profile wrapper">
         <div className="profile__photo-container" onClick={onEditAvatar}>

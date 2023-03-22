@@ -19,6 +19,7 @@ import auth from '../utils/auth'
 
 import SuccessIcon from '../images/icons/Union.svg'
 import FailIcon from '../images/icons/Union_dis.svg'
+import SignOutConfirmationPopup from './SignOutConfirmationPopup'
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -28,6 +29,7 @@ function App() {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
   const [infoTooltipImage, setInfoTooltipImage] = useState(null)
   const [infoTooltipText, setInfoTooltipText] = useState('')
+  const [isSignOutConfirmPopupOpen, setIsSignOutConfirmPopupOpen] = useState(false)
 
   const [currentUser, setCurrentUser] = useState({})
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' })
@@ -68,10 +70,6 @@ function App() {
 
 
 
-
-
-
-
   useEffect(() => {
     tokenCheck()
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -102,6 +100,7 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsCardDeleteConfirmationPopupOpen(false)
     setIsInfoTooltipPopupOpen(false)
+    setIsSignOutConfirmPopupOpen(false)
     setSelectedCard({ name: '', link: '' })
     setEditProfileBtnText('Сохранить')
     setAddPlaceBtnText('Добавить')
@@ -186,12 +185,19 @@ function App() {
     // setAddPlaceBtnText('Добавляем...')
     auth
       .register(regFormValue)
-      .then((res) => {
+      .then(() => {
 
-          navigate('/signin', { replace: true })
-          setInfoTooltipImage(SuccessIcon)
+
+        setInfoTooltipImage(SuccessIcon)
         setInfoTooltipText('Вы успешно зарегистрировались!')
-          setIsInfoTooltipPopupOpen(true)
+
+        setIsInfoTooltipPopupOpen(true)
+        setTimeout(() => {
+          setIsInfoTooltipPopupOpen(false)
+
+        }, 3000)
+        navigate('/signin', { replace: true })
+
 
 
 
@@ -202,13 +208,22 @@ function App() {
         setInfoTooltipImage(FailIcon)
         setInfoTooltipText('Что-то пошло не так! Попробуйте ещё раз.')
         setIsInfoTooltipPopupOpen(true)
+        setTimeout(() => setIsInfoTooltipPopupOpen(false), 3000)
         console.log(err)
       })
 
   }
 
+
   function handleSignOut() {
     localStorage.removeItem('token')
+    navigate('/signin', { replace: true })
+    closeAllPopups()
+  }
+
+  const handleSignOutConfirmation = () => {
+    setIsSignOutConfirmPopupOpen(true)
+
   }
 
 
@@ -246,7 +261,7 @@ function App() {
               cards={cards}
               loggedIn={loggedIn}
               email={email}
-              onSignOut={handleSignOut}
+              onSignOutConfirm={handleSignOutConfirmation}
             />}
             />
           </Routes>
@@ -295,6 +310,12 @@ function App() {
             onCardDeleteComfirmSubmit={handleCardDeleteConfirmationClick}
             cardToDelete={cardToDelete}
             buttonText={deleteCardConfirmationBtnText}
+            signOut={handleSignOut}
+          />
+          <SignOutConfirmationPopup
+            isOpen={isSignOutConfirmPopupOpen}
+            onClose={closeAllPopups}
+            signOut={handleSignOut}
           />
           <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
         </div>

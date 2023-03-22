@@ -186,6 +186,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  background-color: black;
 }
 
 @media screen and (max-width: 544px) {
@@ -194,6 +195,7 @@ body {
 
   }
 }
+
 
 .sign-page__input-field {
   margin: 0;
@@ -211,6 +213,7 @@ body {
   outline:none;
   -webkit-appearance: none;
 }
+
 
 
 
