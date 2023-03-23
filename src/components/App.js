@@ -1,55 +1,65 @@
-import { useState, useEffect } from 'react'
 import '../index.css'
-import Header from './Header'
+import { useState, useEffect } from 'react'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import api from '../utils/api'
+import auth from '../utils/auth'
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import ProtectedRouteElement from './ProtectedRoute'
 import Main from './Main'
 import Footer from './Footer'
 import ImagePopup from './ImagePopup'
 import AddPlacePopup from './AddPlacePopup'
 import EditAvatarPopup from './EditAvatarPopup'
-import api from '../utils/api'
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
 import CardDeleteConfirmationPopup from './CardDeleteConfirmationPopup'
-import ProtectedRouteElement from './ProtectedRoute'
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom'
-import Register from './Register'
-import InfoTooltipPopup from './InfoTooltip'
-import Login from './Login'
-import auth from '../utils/auth'
-
-import SuccessIcon from '../images/icons/Union.svg'
-import FailIcon from '../images/icons/Union_dis.svg'
 import SignOutConfirmationPopup from './SignOutConfirmationPopup'
+import InfoTooltipPopup from './InfoTooltip'
+import Register from './Register'
+import Login from './Login'
+import SuccessIcon from '../images/icons/success.svg'
+import FailIcon from '../images/icons/failure.svg'
 
 function App() {
+  /* STATES */
+  //popups states
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
-  const [infoTooltipImage, setInfoTooltipImage] = useState(null)
-  const [infoTooltipText, setInfoTooltipText] = useState('')
   const [isSignOutConfirmPopupOpen, setIsSignOutConfirmPopupOpen] = useState(false)
-
+  const [isCardDeleteConfirmationPopupOpen, setIsCardDeleteConfirmationPopupOpen] = useState(false)
+  //elements states
   const [currentUser, setCurrentUser] = useState({})
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' })
   const [cards, setCards] = useState([])
-  const [isCardDeleteConfirmationPopupOpen, setIsCardDeleteConfirmationPopupOpen] = useState(false)
   const [cardToDelete, setCardToDelete] = useState({})
-  const [loggedIn, setLoggedIn] = useState(false)
-
   const [deleteCardConfirmationBtnText, setDeleteCardConfirmationBtnText] = useState('Да')
   const [editProfileBtnText, setEditProfileBtnText] = useState('Сохранить')
   const [addPlaceBtnText, setAddPlaceBtnText] = useState('Добавить')
+  //sign states
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [infoTooltipText, setInfoTooltipText] = useState('')
+  const [infoTooltipImage, setInfoTooltipImage] = useState(null)
+  const [email, setEmail] = useState('')
+  const [signOutBtnText, setSignOutBtnText] = useState('Да')
 
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
+  useEffect(() => {
+    tokenCheck()
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([userData, cardsData]) => {
+        setCurrentUser(userData)
+        setCards(cardsData)
+      })
+      .catch((err) => console.log(err))
+  }, [])
 
+  /* FUNCTIONS */
   const tokenCheck = () => {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token')
-      console.log(token)
       if (token) {
         auth.checkToken(token).then((res) => {
           if (res) {
@@ -61,24 +71,6 @@ function App() {
       }
     }
   }
-
-
-
-
-
-
-
-
-
-  useEffect(() => {
-    tokenCheck()
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cardsData]) => {
-        setCurrentUser(userData)
-        setCards(cardsData)
-      })
-      .catch((err) => console.log(err))
-  }, [])
 
   const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true)
   const handleEditProfileClick = () => setIsEditProfilePopupOpen(true)
@@ -165,10 +157,7 @@ function App() {
       .catch((err) => console.log(err))
   }
 
-
-
   function handleLogin(formValue) {
-    // setAddPlaceBtnText('Добавляем...')
     auth
       .login(formValue)
       .then((res) => {
@@ -181,28 +170,16 @@ function App() {
   }
 
   function handleRegister(regFormValue) {
-    console.log(regFormValue)
-    // setAddPlaceBtnText('Добавляем...')
     auth
       .register(regFormValue)
       .then(() => {
-
-
         setInfoTooltipImage(SuccessIcon)
         setInfoTooltipText('Вы успешно зарегистрировались!')
-
         setIsInfoTooltipPopupOpen(true)
         setTimeout(() => {
           setIsInfoTooltipPopupOpen(false)
-
         }, 3000)
         navigate('/signin', { replace: true })
-
-
-
-
-
-
       })
       .catch((err) => {
         setInfoTooltipImage(FailIcon)
@@ -211,45 +188,40 @@ function App() {
         setTimeout(() => setIsInfoTooltipPopupOpen(false), 3000)
         console.log(err)
       })
-
   }
 
-
   function handleSignOut() {
+    setSignOutBtnText('Выходим...')
     localStorage.removeItem('token')
     navigate('/signin', { replace: true })
     closeAllPopups()
   }
 
   const handleSignOutConfirmation = () => {
+    setSignOutBtnText('Да')
     setIsSignOutConfirmPopupOpen(true)
-
   }
-
 
   return (
 
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
-          {/*<ProtectedRouteElement*/}
-          {/*path={}*/}
-          {/*loggedIn={}*/}
-          {/*component={}*/}
-          {/*/>*/}
-          {/*  linkText={headerLinkText}/>*/}
           <Routes>
-            {/*<ProtectedRouteElement*/}
-            {/*  path="/mesto"*/}
-            {/*  loggedIn={loggedIn}*/}
-            {/*  component={Main}*/}
-            {/*  />*/}
             <Route path="/"
                    element={loggedIn
                      ? <Navigate to="/mesto" replace />
                      : <Navigate to="/signup" replace />} />
-            <Route path="/signup" element={<Register onRegister={handleRegister} />}  />
-            <Route path="/signin" element={<Login onLogin={handleLogin} />} />
+            <Route path="/signup"
+                   element={<Register
+                     onRegister={handleRegister}
+                     title="Регистрация"
+                     btnText="Зарегистрироваться" />} />
+            <Route path="/signin"
+                   element={<Login
+                     title="Вход"
+                     onLogin={handleLogin}
+                     btnText="Войти" />} />
             <Route path="/mesto" element={<ProtectedRouteElement
               element={Main}
               onEditAvatar={handleEditAvatarClick}
@@ -265,25 +237,13 @@ function App() {
             />}
             />
           </Routes>
-          {/*<Register />*/}
           <div className="push"></div>
-          {/*<Main*/}
-          {/*  onEditAvatar={handleEditAvatarClick}*/}
-          {/*  onAddPlace={handleAddPlaceClick}*/}
-          {/*  onEditProfile={handleEditProfileClick}*/}
-          {/*  onCardClick={handleCardClick}*/}
-          {/*  onCardLike={handleCardLike}*/}
-          {/*  onCardDeleteConfirm={handleCardDeleteConfirmationClick}*/}
-          {/*  cards={cards}*/}
-          {/*/>*/}
           <Footer />
           <InfoTooltipPopup
             isOpen={isInfoTooltipPopupOpen}
             onClose={closeAllPopups}
             image={infoTooltipImage}
             text={infoTooltipText}
-            // onUpdateUser={handleUpdateUser}
-            // buttonText={editProfileBtnText}
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -316,12 +276,12 @@ function App() {
             isOpen={isSignOutConfirmPopupOpen}
             onClose={closeAllPopups}
             signOut={handleSignOut}
+            btnText={signOutBtnText}
           />
           <ImagePopup card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups} />
         </div>
       </div>
     </CurrentUserContext.Provider>
-
   )
 }
 

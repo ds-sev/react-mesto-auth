@@ -1,19 +1,17 @@
 import Header from './Header'
 import { useState } from 'react'
 
-function Login({onLogin}) {
-  const buttonText = 'Войти'
-  const title = 'Вход'
+function Login({ onLogin, title, btnText }) {
 
   const [formValue, setFormValue] = useState({
     email: '',
-    password: ''
+    password: '',
   })
 
   const handleChange = (evt) => {
-    const {name, value} = evt.target
+    const { name, value } = evt.target
     setFormValue({
-      ...formValue, [name]: value
+      ...formValue, [name]: value,
     })
   }
 
@@ -41,7 +39,6 @@ function Login({onLogin}) {
                 maxLength="30"
                 required
               />
-              {/*<span className="edit-form__field-error place-input-error">{errors.name}</span>*/}
             </label>
             <label>
               <input
@@ -55,14 +52,13 @@ function Login({onLogin}) {
                 maxLength="30"
                 required
               />
-              {/*<span className="edit-form__field-error link-input-error">{errors.link}</span>*/}
             </label>
           </div>
           <button
             className={`edit-form__button-save sign-button button `}
             type="submit"
           >
-            {buttonText}
+            {btnText}
           </button>
         </form>
       </div>

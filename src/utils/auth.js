@@ -11,7 +11,6 @@ class Auth {
     return Promise.reject(`Ошибка ${res.status}`)
   }
 
-
   register(newUserData) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
@@ -19,7 +18,7 @@ class Auth {
       body: JSON.stringify({
         email: newUserData.email,
         password: newUserData.password,
-      })
+      }),
     }).then(this._checkResponse)
   }
 
@@ -30,7 +29,7 @@ class Auth {
       body: JSON.stringify({
         email: userData.email,
         password: userData.password,
-      })
+      }),
     }).then(this._checkResponse)
   }
 
@@ -39,12 +38,10 @@ class Auth {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization' : `Bearer ${token}`
-      }
+        'Authorization': `Bearer ${token}`,
+      },
     }).then(this._checkResponse)
   }
-
-
 
 }
 
@@ -52,7 +49,7 @@ const auth = new Auth({
   baseUrl: 'https://auth.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json',
-  }
+  },
 })
 
 export default auth

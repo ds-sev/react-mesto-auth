@@ -1,10 +1,6 @@
 import PopupWithForm from './PopupWithForm'
-import useValidation from '../hooks/useValidation'
-import CardDeleteConfirmationPopup from './CardDeleteConfirmationPopup'
 
-function SignOutConfirmationPopup({ isOpen, onClose, signOut }) {
-
-  const { isFormValid } = useValidation()
+function SignOutConfirmationPopup({ isOpen, onClose, signOut, btnText }) {
 
   function handleSubmit(evt) {
     evt.preventDefault()
@@ -12,19 +8,13 @@ function SignOutConfirmationPopup({ isOpen, onClose, signOut }) {
   }
 
   return (
-
     <PopupWithForm
       title="Вы уверены?"
       isOpen={isOpen}
       onClose={onClose}
-      buttonText="Да"
+      buttonText={btnText}
       onSubmit={handleSubmit}
-
-      isValid={isFormValid}
     />
-
-
-
   )
 }
 
