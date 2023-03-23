@@ -56,14 +56,14 @@ function Register({ onRegister, title, btnText }) {
             </label>
           </div>
           <button
-            className={`edit-form__button-save sign-button button `}
+            className={`edit-form__button-save sign-page__button button `}
             type="submit"
           >
             {btnText}
           </button>
         </form>
-        <span className="sign__hint">Уже зарегистрированы?<a className="link"
-                                                             href="/signin">Войти</a></span>
+        <span className="sign-page__hint">Уже зарегистрированы?<a className="link"
+                                                                  href="/signin">Войти</a></span>
       </div>
       <InfoTooltip />
     </>

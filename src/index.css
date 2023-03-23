@@ -75,45 +75,29 @@
 @import url('./blocks/image-view/__item/image-view__item.css');
 @import url('./blocks/image-view/__title/image-view__title.css');
 
-* {
-  margin: 0;
-  padding: 0;
-}
+
+@import url('./blocks/container/container.css');
+@import url('./blocks/push/push.css');
+@import url('./blocks/link/link.css');
+
+
 
 html {
   background-color: black;
   height: 100%;
-  /*border: 1px solid red;*/
-  
 }
 
 body {
   height: 100%;
-
-}
-
-.container {
-  height: 100%;
-}
-
-.push {
-  flex-grow: 1;
-
 }
 
 
 
-.link {
-  margin-left: 3px;
-  color: #ffffff;
-  text-decoration: none;
-  transition: ease-out .2s;
-}
 
-.link:hover {
-  transition: ease-in .1s;
-  opacity: .6;
-}
+
+
+
+
 
 .header__profile {
   margin-top: 6px;
@@ -141,173 +125,13 @@ body {
   margin-right: 24px;
 }
 
+@import url(./blocks/sign-page/sign-page.css);
+@import url(./blocks/sign-page/__title/sign-page__title.css);
+@import url(./blocks/sign-page/__inputs-container/sign-page__inputs-container.css);
+@import url(./blocks/sign-page/__input-field/sign-page__input-field.css);
+@import url(./blocks/sign-page/__button/sign-page__button.css);
 
-.sign-page {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  max-width: 880px;
-  padding-left: 19px;
-  padding-right: 19px;
-  height: 100%;
-  max-height: 521px;
-  text-align: center;
-  width: 358px;
-}
+@import url(./blocks/info-tooltip/info-tooltip.css);
+@import url(./blocks/info-tooltip/__title/info-tooltip__title.css);
+@import url(./blocks/info-tooltip/__image/info-tooltip__image.css);
 
-@media screen and (max-width: 544px) {
-  .sign-page {
-    width: 260px;
-  }
-}
-
-.sign-page__title {
-  margin-top: 60px;
-  margin-bottom: 46px;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-}
-
-@media screen and (max-width: 544px) {
-  .sign-page__title {
-    margin-top: 38px;
-    margin-bottom: 35px;
-  
-    font-size: 20px;
-  }
-}
-
-.sign-page__inputs-container {
-  margin-bottom: 216px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  background-color: black;
-}
-
-@media screen and (max-width: 544px) {
-  .sign-page__inputs-container {
-    margin-bottom: 171px;
-
-  }
-}
-
-
-.sign-page__input-field {
-  margin: 0;
-  padding: 2px 0 8px;
-  width: 100%;
-  background-color: black;
-  border: none;
-  border-bottom: 2px solid #cccccc;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  color: #CCCCCC;
-  outline:none;
-  -webkit-appearance: none;
-}
-
-
-
-
-.sign-button {
-  height: 50px;
-  min-height: 46px;
-  margin-bottom: 15px;
-  margin-top: 0;
-  background-color: white;
-  color: black;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-}
-
-@media screen and (max-width: 544px) {
-  .sign-button {
-    height: 46px;
-    margin-bottom: 20px;
-    
-  }
-}
-
-.sign__hint {
-  justify-content: center;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-}
-
-
-
-.info-tooltip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  
-  
-  
-  padding: 60px 36px;
-  box-sizing: border-box;
-  position: relative;
-  width: 430px;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-  height: fit-content;
-  
-
-}
-
-@media screen and (max-width: 544px) {
-  .info-tooltip {
-    margin: auto 19px;
-    padding: 25px 22px;
-    gap: 10px;
-  }
-}
-
-.info-tooltip__title {
-  
-  margin: 0;
-  color: black;
-  font-size: 24px;
-  font-weight: 900;
-  line-height: 29px;
-  
-  text-align: center;
-
-}
-
-@media screen and (max-width: 544px) {
-  .info-tooltip__title {
-    margin-bottom: 70px;
-    font-size: 18px;
-    line-height: 22px;
-  }
-}
-
-.info-tooltip__image {
-  width: 120px;
-  height: 120px;
-  /*background-repeat: no-repeat;*/
-
-  background-position: center;
-  background-size: cover;
-
-  /*color: black;*/
-  
-  /*background-image: url('./images/icons/success.svg');*/
-}

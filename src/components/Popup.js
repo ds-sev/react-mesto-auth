@@ -21,7 +21,7 @@ function Popup({ name, isOpen, onClose, children, theme }) {
   })
 
   return (
-    <div className={`popup popup-${name} ${theme} ${isOpen
+    <div className={`popup popup-${name} ${isOpen
       ? 'popup_opened'
       : ''}`} onClick={onOverlayClick}>
       {children}

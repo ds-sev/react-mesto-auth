@@ -14,6 +14,8 @@ function SignOutConfirmationPopup({ isOpen, onClose, signOut, btnText }) {
       onClose={onClose}
       buttonText={btnText}
       onSubmit={handleSubmit}
+      isValid={true}
+      theme='edit-form__title_small-margin-bottom'
     />
   )
 }

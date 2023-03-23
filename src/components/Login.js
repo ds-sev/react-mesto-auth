@@ -55,7 +55,7 @@ function Login({ onLogin, title, btnText }) {
             </label>
           </div>
           <button
-            className={`edit-form__button-save sign-button button `}
+            className={`edit-form__button-save sign-page__button button `}
             type="submit"
           >
             {btnText}

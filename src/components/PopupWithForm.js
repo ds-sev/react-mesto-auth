@@ -1,8 +1,8 @@
 import Popup from './Popup'
 
-function PopupWithForm({ title, name, isOpen, children, onClose, onSubmit, buttonText, isValid }) {
+function PopupWithForm({ title, name, isOpen, children, onClose, onSubmit, buttonText, isValid, theme }) {
   return (
-    <Popup name={name} isOpen={isOpen} onClose={onClose}>
+    <Popup name={name} isOpen={isOpen} onClose={onClose} theme={theme}>
       <div className="popup__container">
         <form onSubmit={onSubmit} className="edit-form" method="post" name={`${name}`}>
           <button
@@ -11,7 +11,7 @@ function PopupWithForm({ title, name, isOpen, children, onClose, onSubmit, butto
             aria-label="Закрыть"
             onClick={onClose}
           />
-          <h3 className="edit-form__title">{title}</h3>
+          <h3 className={`edit-form__title ${theme || ''}`}>{title}</h3>
           <fieldset className="edit-form__fields">
             {children}
             <button

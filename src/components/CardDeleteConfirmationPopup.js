@@ -18,6 +18,7 @@ function CardDeleteConfirmationPopup({ isOpen, onClose, onCardDelete, cardToDele
       onSubmit={handleSubmit}
       cardToDelete={cardToDelete}
       isValid={isFormValid}
+      theme='edit-form__title_small-margin-bottom'
     />
   )
 }
