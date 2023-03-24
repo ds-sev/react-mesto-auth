@@ -4,8 +4,6 @@
 <img src="https://github.com/ds-sev/mesto-react/blob/main/src/images/mesto-react_preview.png" width="380px" align="right">
 
 
-[Посмотреть готовый проект](https://ds-sev.github.io/mesto-react/)
-
 📝 **ТЗ:**
 
 * Портирование ранее созданного проекта Место на "Реакт"
