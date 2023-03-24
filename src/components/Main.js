@@ -24,7 +24,7 @@ function Main({
       <Header btnText="Выйти"
               onClick={onSignOutConfirm}
               onSignOutConfirm={onSignOutConfirm}
-              btnTheme="header__sign-btn_out"
+              btnTheme="header__button_sign-out"
               email={email}
               isBurgerOpen={isBurgerOpen}
               onBurgerBtnClick={onBurgerBtnClick}
