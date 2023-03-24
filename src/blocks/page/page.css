@@ -13,8 +13,19 @@
   
 
   min-height: 100%;
-  overflow: hidden;
+  
+  
+  
+  
+  /*overflow: hidden;*/
+
+  
+}
 
 
-
+@media screen and (max-width: 544px) {
+  .page {
+    /*margin-top: 142px;*/
+    
+  }
 }

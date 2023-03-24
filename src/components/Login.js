@@ -22,7 +22,7 @@ function Login({ onLogin, title, btnText }) {
 
   return (
     <>
-      <Header btnText="Регистрация" btnLink="/signup" />
+      <Header btnText="Регистрация" btnLink="/signup" hideButton="header__burger-btn_hide"  hideEmail="header__email_hide" />
       <div className="sign-page">
         <h3 className="sign-page__title">{title}</h3>
         <form onSubmit={handleSubmit}>

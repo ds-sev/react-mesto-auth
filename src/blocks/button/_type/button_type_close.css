@@ -4,7 +4,7 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  background: center / cover no-repeat url('../../../images/buttons/Close Icon.svg');
+  background: center / cover no-repeat url('../../../images/buttons/btn_close.svg');
 }
 
 @media screen and (max-width: 544px) {

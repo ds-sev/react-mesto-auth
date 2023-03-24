@@ -7,3 +7,11 @@
   max-width: 430px;
   min-height: 330px;
 }
+
+
+@media screen and (max-width: 544px) {
+  .popup__container {
+    /*position: fixed;*/
+
+  }
+}

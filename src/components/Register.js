@@ -23,7 +23,7 @@ function Register({ onRegister, title, btnText }) {
 
   return (
     <>
-      <Header btnText="Войти" btnLink="/signin" />
+      <Header btnText="Войти" btnLink="/signin" hideButton="header__burger-btn_hide" hideEmail="header__email_hide" />
       <div className="sign-page">
         <h3 className="sign-page__title">{title}</h3>
         <form onSubmit={handleSubmit}>

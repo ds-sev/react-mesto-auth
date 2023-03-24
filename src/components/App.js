@@ -194,6 +194,7 @@ function App() {
     setSignOutBtnText('Выходим...')
     localStorage.removeItem('token')
     navigate('/signin', { replace: true })
+    setIsBurgerOpen(false)
     closeAllPopups()
   }
 
@@ -202,10 +203,23 @@ function App() {
     setIsSignOutConfirmPopupOpen(true)
   }
 
+
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false)
+
+  const handleBurgerViewToggle = (evt) => {
+
+    setIsBurgerOpen(!isBurgerOpen)
+
+
+  }
+
+
+
   return (
 
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
+        {/*<div className={`page ${isBurgerOpen ? 'header__open' : ''}`}>*/}
         <div className="page">
           <Routes>
             <Route path="/"
@@ -234,6 +248,9 @@ function App() {
               loggedIn={loggedIn}
               email={email}
               onSignOutConfirm={handleSignOutConfirmation}
+
+              onBurgerBtnClick={handleBurgerViewToggle}
+              isBurgerOpen={isBurgerOpen}
             />}
             />
           </Routes>

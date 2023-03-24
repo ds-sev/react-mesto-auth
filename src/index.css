@@ -82,49 +82,6 @@
 
 
 
-html {
-  background-color: black;
-  height: 100%;
-}
-
-body {
-  height: 100%;
-}
-
-
-
-
-
-
-
-
-
-.header__profile {
-  margin-top: 6px;
-  font-size: 18px;
-  line-height: 22px;
-
-}
-
-
-
-@media screen and (max-width: 544px) {
-  .header__profile {
-    font-size: 14px;
-  }
-}
-
-.header__sign-btn_out {
-  color: #A9A9A9;
-}
-.header__sign-btn_out:hover {
-  cursor: pointer;
-}
-
-.header__email {
-  margin-right: 24px;
-}
-
 @import url(./blocks/sign-page/sign-page.css);
 @import url(./blocks/sign-page/__title/sign-page__title.css);
 @import url(./blocks/sign-page/__inputs-container/sign-page__inputs-container.css);
@@ -134,4 +91,255 @@ body {
 @import url(./blocks/info-tooltip/info-tooltip.css);
 @import url(./blocks/info-tooltip/__title/info-tooltip__title.css);
 @import url(./blocks/info-tooltip/__image/info-tooltip__image.css);
+
+html {
+  background-color: black;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+
+}
+
+
+
+.header__burger-btn {
+  display: none;
+  min-width: 24px;
+  min-height: 21px;
+  background-color: black;
+  border: 0;
+  /*background-image: url('./images/buttons/burger.svg');*/
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 544px) {
+  .header__burger-btn {
+    display: block;
+  }
+}
+
+.header__burger-btn_hide {
+  display: none;
+}
+
+
+
+.auth-container {
+ margin-top: 6px;
+  
+  display: grid;
+  
+  /*grid-template-columns: 1fr 120px;*/
+  grid-template-columns: 1fr auto;
+  justify-content: flex-end;
+  align-items: center;
+
+
+  
+  
+
+  
+  
+
+
+  
+  
+  
+}
+
+@media screen and (max-width: 544px) {
+  .auth-container {
+max-width: unset;
+    /*left: 0;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    height: 142px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  
+    
+
+
+  }
+  .auth__container_hide {
+    display: none;
+  }
+  
+  .auth-container__open {
+    margin: 0;
+    width: 100%;
+    height: 142px;
+    /*margin-top: 142px;*/
+    /*border: 1px solid red;*/
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+  
+  
+  
+    transform: translateY(142px);
+    transition: ease .5s;
+    
+  
+  }
+  
+}
+
+/*@media screen and (min-width: 545px) {*/
+/*auth-container_low-res*/
+
+
+
+
+
+
+.menu {
+
+  /*display: none;*/
+  /*width: 100%;*/
+  /*!*height: 142px;*!*/
+  /*!*max-height: 0;*!*/
+  /*background-color: #c4c4c4;*/
+  /*transition: margin-top 2s ease;*/
+  /*!*transform: translate(-100%, 0px);*!*/
+
+  position: absolute;
+  left: 0;
+  top: -286px;
+  width: 100%;
+  height: 142px;
+  transition: transform .5s ease;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  
+  
+
+
+
+
+}
+
+@media screen and (max-width: 544px) {
+  .menu__open {
+    transform: translateY(100%);
+    
+  
+
+  
+  
+
+    
+    /*height: 200px;*/
+    /*  transition: height .3s;*/
+    /*  !*transform: translateX(100%);*!*/
+  }
+}
+
+
+/*.menu {*/
+/*  background-color: #545454;*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  height: 300px;*/
+/*  */
+/*  transition: left .3s ease 0s;*/
+/*}*/
+
+
+@media screen and (max-width: 544px) {
+  .header__open {
+
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .header_open-menu-position {
+    transition: margin-top .3s;
+    margin-top: 142px;
+  }
+}
+
+
+
+
+
+.header__profile {
+
+
+  justify-self: end;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+
+
+@media screen and (max-width: 544px) {
+  .header__profile {
+    font-size: 14px;
+
+  }
+}
+
+.header__sign-btn_out {
+  font-size: 18px;
+  color: #A9A9A9;
+}
+.header__sign-btn_out:hover {
+  cursor: pointer;
+}
+
+.header__email {
+
+
+
+  overflow: hidden;
+  
+  
+  
+  
+  margin-right: 24px;
+
+  
+  
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  
+  
+
+  
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+
+
+  
+}
+
+@media screen and (max-width: 544px) {
+  .header__email {
+
+
+    margin-right: 0;
+  }
+  
+  .header__email_hide {
+    display: none;
+  }
+}
+
+
+
 
