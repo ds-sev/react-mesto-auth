@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import Card from './Card'
 import Header from './Header'
@@ -13,28 +13,14 @@ function Main({
                 cards,
                 email,
                 onSignOutConfirm,
-
                 onBurgerBtnClick,
-  isBurgerOpen
+                isBurgerOpen,
               }) {
 
   const currentUser = useContext(CurrentUserContext)
 
-  // const [isBurgerOpen, setIsBurgerOpen] = useState(false)
-  //
-  // const handleBurgerViewToggle = (evt) => {
-  //   console.log(evt.target)
-  //   setIsBurgerOpen(!isBurgerOpen)
-  //
-  //
-  // }
-
-
-
-
   return (
     <>
-
       <Header btnText="Выйти"
               onClick={onSignOutConfirm}
               onSignOutConfirm={onSignOutConfirm}
@@ -42,12 +28,7 @@ function Main({
               email={email}
               isBurgerOpen={isBurgerOpen}
               onBurgerBtnClick={onBurgerBtnClick}
-              hideProfileContainer="auth__container_hide"
-              // menuBurgerBtn={<button className="header__burger-btn"
-              //                        }
-
-
-
+              hideProfileContainer="header__auth-container_hide"
       />
       <main className="content">
         <section className="profile wrapper">

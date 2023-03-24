@@ -29,6 +29,7 @@ function App() {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
   const [isSignOutConfirmPopupOpen, setIsSignOutConfirmPopupOpen] = useState(false)
   const [isCardDeleteConfirmationPopupOpen, setIsCardDeleteConfirmationPopupOpen] = useState(false)
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false)
   //elements states
   const [currentUser, setCurrentUser] = useState({})
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' })
@@ -203,23 +204,11 @@ function App() {
     setIsSignOutConfirmPopupOpen(true)
   }
 
-
-  const [isBurgerOpen, setIsBurgerOpen] = useState(false)
-
-  const handleBurgerViewToggle = (evt) => {
-
-    setIsBurgerOpen(!isBurgerOpen)
-
-
-  }
-
-
+  const handleBurgerViewToggle = () => setIsBurgerOpen(!isBurgerOpen)
 
   return (
-
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
-        {/*<div className={`page ${isBurgerOpen ? 'header__open' : ''}`}>*/}
         <div className="page">
           <Routes>
             <Route path="/"
@@ -248,7 +237,6 @@ function App() {
               loggedIn={loggedIn}
               email={email}
               onSignOutConfirm={handleSignOutConfirmation}
-
               onBurgerBtnClick={handleBurgerViewToggle}
               isBurgerOpen={isBurgerOpen}
             />}
