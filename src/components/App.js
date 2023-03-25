@@ -168,7 +168,13 @@ function App() {
         setEmail(formValue.email)
         navigate('/', { replace: true })
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setInfoTooltipImage(FailIcon)
+        setInfoTooltipText('Что-то пошло не так! Попробуйте ещё раз.')
+        setIsInfoTooltipPopupOpen(true)
+        setTimeout(() => setIsInfoTooltipPopupOpen(false), 3000)
+        console.log(err)
+      })
   }
 
   function handleRegister(regFormValue) {
