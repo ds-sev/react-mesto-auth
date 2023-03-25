@@ -1,6 +1,7 @@
 import logoPath from '../images/logo/logo.svg'
 import burgerBtnIcon from '../images/buttons/burger.svg'
 import closeBtnIcon from '../images/buttons/btn_close.svg'
+import { Link } from 'react-router-dom'
 
 function Header({
                   btnLink,
@@ -24,9 +25,12 @@ function Header({
         : ''}`}>
         <div className="header__auth-container header__auth-container_open">
           <span className="header__email">{email}</span>
-          <a className={`header__button ${btnTheme} link`}
-             onClick={onClick}
-             href={btnLink}>{btnText}</a>
+          <Link to={btnLink} className={`header__button ${btnTheme} link`}
+            onClick={onClick}
+           >{btnText}</Link>
+          {/*<a className={`header__button ${btnTheme} link`}*/}
+          {/*   onClick={onClick}*/}
+          {/*   href={btnLink}>{btnText}</a>*/}
         </div>
       </div>
       <header className={`header header_position ${isBurgerOpen
@@ -43,9 +47,8 @@ function Header({
         />
         <div className={`header__auth-container ${hideProfileContainer}`}>
           <span className={`header__email ${hideEmail || ''}`}>{email}</span>
-          <a className={`header__button ${btnTheme} link`}
-             onClick={onClick}
-             href={btnLink}>{btnText}</a>
+          <Link to={btnLink} className={`header__button ${btnTheme} link`}
+             onClick={onClick}>{btnText}</Link>
         </div>
       </header>
     </>

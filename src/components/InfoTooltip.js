@@ -1,7 +1,6 @@
 import Popup from './Popup'
 
-function InfoTooltipPopup({ isOpen, onClose, state }) {
-  console.log(state)
+function InfoTooltipPopup({ onClose, state }) {
   return (
     <Popup name="{name}" isOpen={state.isOpen} onClose={onClose}>
       <div className="popup__container">
