@@ -49,27 +49,28 @@ function App() {
 
   useEffect(() => {
     tokenCheck()
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cardsData]) => {
-        setCurrentUser(userData)
-        setCards(cardsData)
-      })
-      .catch((err) => console.log(err))
-  }, [])
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData)
+          setCards(cardsData)
+        })
+        .catch((err) => console.log(err))
+    }
+  }, [loggedIn])
 
   /* FUNCTIONS */
   const tokenCheck = () => {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token')
-      if (token) {
-        auth.checkToken(token).then((res) => {
-          if (res) {
-            setLoggedIn(true)
-            navigate('/mesto', { replace: true })
-            setEmail(res.data.email)
-          }
-        })
-      }
+    const token = localStorage.getItem('token')
+    if (token && !loggedIn) {
+      auth.checkToken(token).then((res) => {
+        if (res) {
+          setLoggedIn(true)
+          navigate('/mesto', { replace: true })
+          setEmail(res.data.email)
+        }
+      })
+        .catch((err) => console.log(err))
     }
   }
 
