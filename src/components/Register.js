@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Header from './Header'
+import { Link } from 'react-router-dom'
 
 function Register({ onRegister, title, btnText }) {
 
@@ -64,8 +65,8 @@ function Register({ onRegister, title, btnText }) {
             {btnText}
           </button>
         </form>
-        <span className="sign-page__hint">Уже зарегистрированы?<a className="link"
-                                                                  href="/signin">Войти</a></span>
+        <span className="sign-page__hint">Уже зарегистрированы?<Link to="/signin" className="link"
+        >Войти</Link></span>
       </div>
     </>
   )
