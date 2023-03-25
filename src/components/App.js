@@ -165,7 +165,7 @@ function App() {
       .then((res) => {
         localStorage.setItem('token', res.token)
         setLoggedIn(true)
-        tokenCheck()
+        setEmail(formValue.email)
         navigate('/', { replace: true })
       })
       .catch((err) => console.log(err))
