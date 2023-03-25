@@ -26,7 +26,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
   const [isSignOutConfirmPopupOpen, setIsSignOutConfirmPopupOpen] = useState(false)
   const [isCardDeleteConfirmationPopupOpen, setIsCardDeleteConfirmationPopupOpen] = useState(false)
   const [isBurgerOpen, setIsBurgerOpen] = useState(false)
@@ -40,8 +39,7 @@ function App() {
   const [addPlaceBtnText, setAddPlaceBtnText] = useState('Добавить')
   //sign states
   const [loggedIn, setLoggedIn] = useState(false)
-  const [infoTooltipText, setInfoTooltipText] = useState('')
-  const [infoTooltipImage, setInfoTooltipImage] = useState(null)
+  const [infoTooltipState, setInfoTooltipState] = useState({isOpen: false, text:'', image:''})
   const [email, setEmail] = useState('')
   const [signOutBtnText, setSignOutBtnText] = useState('Да')
 
@@ -93,12 +91,12 @@ function App() {
     setIsImagePopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsCardDeleteConfirmationPopupOpen(false)
-    setIsInfoTooltipPopupOpen(false)
     setIsSignOutConfirmPopupOpen(false)
     setSelectedCard({ name: '', link: '' })
     setEditProfileBtnText('Сохранить')
     setAddPlaceBtnText('Добавить')
     setDeleteCardConfirmationBtnText('Да')
+    setInfoTooltipState({isOpen: false, text: '', image: ''})
   }
 
   function handleCardLike(card) {
@@ -169,10 +167,8 @@ function App() {
         navigate('/', { replace: true })
       })
       .catch((err) => {
-        setInfoTooltipImage(FailIcon)
-        setInfoTooltipText('Что-то пошло не так! Попробуйте ещё раз.')
-        setIsInfoTooltipPopupOpen(true)
-        setTimeout(() => setIsInfoTooltipPopupOpen(false), 3000)
+        setInfoTooltipState({isOpen: true, text: 'Что-то пошло не так! Попробуйте ещё раз.', image: FailIcon })
+        setTimeout(() => closeAllPopups(), 3000)
         console.log(err)
       })
   }
@@ -181,19 +177,15 @@ function App() {
     auth
       .register(regFormValue)
       .then(() => {
-        setInfoTooltipImage(SuccessIcon)
-        setInfoTooltipText('Вы успешно зарегистрировались!')
-        setIsInfoTooltipPopupOpen(true)
+        setInfoTooltipState({isOpen: true, text: 'Вы успешно зарегистрировались!', image: SuccessIcon })
         setTimeout(() => {
-          setIsInfoTooltipPopupOpen(false)
+          closeAllPopups()
         }, 3000)
         navigate('/signin', { replace: true })
       })
       .catch((err) => {
-        setInfoTooltipImage(FailIcon)
-        setInfoTooltipText('Что-то пошло не так! Попробуйте ещё раз.')
-        setIsInfoTooltipPopupOpen(true)
-        setTimeout(() => setIsInfoTooltipPopupOpen(false), 3000)
+        setInfoTooltipState({isOpen: true, text: 'Что-то пошло не так! Попробуйте ещё раз.', image: FailIcon })
+        setTimeout(() => closeAllPopups(), 3000)
         console.log(err)
       })
   }
@@ -252,10 +244,8 @@ function App() {
           <div className="push"></div>
           <Footer />
           <InfoTooltipPopup
-            isOpen={isInfoTooltipPopupOpen}
+            state={infoTooltipState}
             onClose={closeAllPopups}
-            image={infoTooltipImage}
-            text={infoTooltipText}
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}

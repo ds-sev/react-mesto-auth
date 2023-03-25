@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Header from './Header'
-import InfoTooltip from './InfoTooltip'
 
 function Register({ onRegister, title, btnText }) {
 
@@ -68,7 +67,6 @@ function Register({ onRegister, title, btnText }) {
         <span className="sign-page__hint">Уже зарегистрированы?<a className="link"
                                                                   href="/signin">Войти</a></span>
       </div>
-      <InfoTooltip />
     </>
   )
 }
