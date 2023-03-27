@@ -1,8 +1,10 @@
 # mesto-react
 
 ![logo_white](src/images/logo/logo_black.png)&ensp;<img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" width="40px">&ensp;![logo_black](src/images/logo/logo.svg)
-<img src="https://github.com/ds-sev/mesto-react/blob/main/src/images/mesto-react_preview.png" width="380px" align="right">
+<img src="
+https://github.com/ds-sev/react-mesto-auth/blob/main/src/images/mesto-react_auth_preview.png" width="380px" align="right">
 
+[Посмотреть готовый проект](https://ds-sev.github.io/react-mesto-auth/#/mesto)
 
 📝 **ТЗ:**
 
